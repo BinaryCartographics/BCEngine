@@ -30,9 +30,9 @@ jobs:
       run: dotnet restore ${{ matrix.project }}
     - name: Build
       run: dotnet build --configuration Release --no-restore ${{ matrix.project }}
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage" ${{ matrix.project }}
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v2.6.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+        coverageCommand: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage" ${{ matrix.project }}
