@@ -1,5 +1,6 @@
 ﻿using BCEngine.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using IDrawable = BCEngine.Interfaces.IDrawable;
 
@@ -23,6 +24,7 @@ namespace BCEngine.Scenes
 
     public IReadOnlyList<IGameObject> GameObjects { get; }
     public IReadOnlyList<IDrawable> Drawables { get; }
+
     public bool AddGameObject(IGameObject gameObject)
     {
       if (!_gameObjects.Contains(gameObject))
@@ -45,6 +47,17 @@ namespace BCEngine.Scenes
         return true;
       }
       return false;
+    }
+
+    public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+    {
+      var color = BackgroundColor;
+      graphicsDevice.Clear(color);
+
+      foreach (var drawable in _drawables)
+      {
+        drawable.Draw();
+      }
     }
   }
 }

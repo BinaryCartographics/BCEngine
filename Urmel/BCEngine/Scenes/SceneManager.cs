@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace BCEngine.Scenes
@@ -54,8 +53,7 @@ namespace BCEngine.Scenes
 
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
-      var color = CurrentScene?.BackgroundColor ?? Color.Black;
-      graphicsDevice.Clear(color);
+      CurrentScene?.Draw(graphicsDevice, spriteBatch);
     }
   }
 }

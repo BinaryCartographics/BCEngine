@@ -1,5 +1,4 @@
-﻿using BCEngine;
-using BCEngine.Scenes;
+﻿using BCEngine.Scenes;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Xunit;
