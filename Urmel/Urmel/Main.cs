@@ -44,8 +44,7 @@ namespace Urmel
 
     protected override void Draw(GameTime gameTime)
     {
-      var color = _sceneManager.CurrentScene?.BackgroundColor ?? Color.Black;
-      GraphicsDevice.Clear(color);
+      _sceneManager.Draw(GraphicsDevice, _spriteBatch);
 
       base.Draw(gameTime);
     }

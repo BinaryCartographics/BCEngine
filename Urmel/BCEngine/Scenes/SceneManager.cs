@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace BCEngine.Scenes
 {
@@ -7,10 +9,12 @@ namespace BCEngine.Scenes
     private readonly List<Scene> _scenes;
 
     public Scene CurrentScene { get; private set; }
+    public IReadOnlyList<Scene> Scenes { get; }
 
     public SceneManager()
     {
       _scenes = new List<Scene>();
+      Scenes = _scenes.AsReadOnly();
     }
 
     /// <summary>
@@ -28,6 +32,16 @@ namespace BCEngine.Scenes
       return false;
     }
 
+    public bool RemoveScene(Scene toRemove)
+    {
+      if (_scenes.Contains(toRemove) && toRemove != CurrentScene)
+      {
+        _scenes.Remove(toRemove);
+        return true;
+      }
+      return false;
+    }
+
     public bool NavigateToScene(Scene scene)
     {
       if (_scenes.Contains(scene) && CurrentScene != scene)
@@ -36,6 +50,12 @@ namespace BCEngine.Scenes
         return true;
       }
       return false;
+    }
+
+    public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+    {
+      var color = CurrentScene?.BackgroundColor ?? Color.Black;
+      graphicsDevice.Clear(color);
     }
   }
 }
