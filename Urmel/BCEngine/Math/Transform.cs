@@ -1,79 +1,86 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace BCEngine.Math
 {
-  class Transform
+  public class Transform
   {
-    /// <summary>
-    /// Parent Child transform stuff
-    /// </summary>
+    private Transform _parent;
+    public Transform Parent { get; }
+
+    private readonly List<Transform> _children;
+    public IReadOnlyList<Transform> Children { get; }
+
+    private Vector2 _position;
+    public Vector2 Position { get; set; }
+
+    private Vector2 _scale;
+    public Vector2 Scale { get; set; }
+
+    private float _rotation;
+    public float Rotation { get; set; }
+    public float RotationDegrees 
+    { 
+      get 
+      { 
+        return MathHelper.ToDegrees(Rotation); 
+      }
+      set
+      {
+        Rotation = MathHelper.ToRadians(value);
+      }
+    }
+    public Transform() 
+    {
+      _children = new List<Transform>();
+      Children = _children.AsReadOnly();
+    }
+
+
+    public bool AddTransform(Transform transform)
+    {
+      if (!_children.Contains(transform))
+      {
+        _children.Add(transform); 
+        return true;
+      }
+      return false;
+    }
+    public bool RemoveTransform(Transform transform)
+    {
+      if (_children.Contains(transform))
+      {
+        _children.Remove(transform);
+        return true;
+      }
+      return false;
+    }
+    public bool SetParentTransform(Transform transform)
+    {
+      if (!transform._children.Contains(this))//if this is not a child to the new parent, continue
+      {
+        if (_parent != null)  //if this transform has a parent, remove self from old parents child-list, otherwise, continue
+        {
+          _parent.RemoveTransform(this);
+        }
+        _parent = transform;
+        _parent.AddTransform(this);
+        return true;
+      }
+      return false;
+    }
+
     public Transform WorldTransform
     {
       get
       {
-        if (IsChild)
+        if (_parent == null)
         {
-          return Compose(Parent, this);
+          return this;
         }
-        return this;
+        return Transform.Compose(Parent, this);
       }
     }
-    /// <summary>
-    /// Positions
-    /// </summary>
-    public Vector2 Position = Vector2.Zero;
-    public Vector2 WorldPosition
-    {
-      get { return WorldTransform.Position; }
-    }
-    /// <summary>
-    /// Scales
-    /// </summary>
-    public Vector2 Scale = Vector2.One;
-    public Vector2 WorldScale
-    {
-      get { return WorldTransform.Scale; }
-    }
-    /// <summary>
-    /// Rotations
-    /// </summary>
-    public float Rotation = 0;
-    public float WorldRotation
-    {
-      get { return WorldTransform.Rotation; }
-    }
-
-    /// <summary>
-    /// Radians are the default rotation method for monogame, so interacting with rotations in degrees requires conversion
-    /// </summary>
-    public float RotationDegrees
-    {
-      get { return MathHelper.ToDegrees(Rotation); }
-      set { Rotation = MathHelper.ToRadians(value); }
-    }
-    /// <summary>
-    /// no conversions needed here
-    /// </summary>
-    public float RotationRadians
-    {
-      get; set;
-    }
-
-    #region Base properties
-    public bool IsChild { get; }
-    public Transform Parent { get; }
-    public bool IsEnabled { get; }
-    #endregion
-
-    public Transform() { }
-    public Transform(Transform parent)
-    {
-      IsChild = true;
-      Parent = parent;
-    }
-
-    private static readonly Transform identity = new Transform();
-    public static Transform Identity { get { return identity; } }
 
     public static Transform Compose(Transform parent, Transform child)
     {
@@ -101,9 +108,9 @@ namespace BCEngine.Math
 
     public Vector2 InverseTransformVector(Vector2 point)
     {
-      Vector2 result = point - WorldPosition;
-      result = Vector2.Transform(result, Matrix.CreateRotationZ(-WorldRotation));
-      result /= WorldScale;
+      Vector2 result = point - WorldTransform.Position;
+      result = Vector2.Transform(result, Matrix.CreateRotationZ(-WorldTransform.Rotation));
+      result /= WorldTransform.Scale;
       return result;
     }
 

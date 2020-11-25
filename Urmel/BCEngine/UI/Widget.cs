@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BCEngine.Math;
+using Microsoft.Xna.Framework;
 
 namespace BCEngine.UI
 {
   public abstract partial class Widget
   {
+    public Transform transform { get; set; }
     /// <summary>
     /// Bare bones code for now, needs to be worked on, then unit tests
     /// can be added.
