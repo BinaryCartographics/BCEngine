@@ -5,19 +5,13 @@ namespace BCEngine.Math
 {
   public class Transform
   {
-    private Transform _parent;
-    public Transform Parent { get; }
+    ///private Transform _parent;
+    public Transform Parent { get; private set; }
 
     private readonly List<Transform> _children;
     public IReadOnlyList<Transform> Children { get; }
-
-    private Vector2 _position;
     public Vector2 Position { get; set; }
-
-    private Vector2 _scale;
     public Vector2 Scale { get; set; }
-
-    private float _rotation;
     public float Rotation { get; set; }
     public float RotationDegrees 
     { 
@@ -36,45 +30,63 @@ namespace BCEngine.Math
       Children = _children.AsReadOnly();
     }
 
+    /// <summary>
+    /// 
+    /// 
+    /// add to self
+    /// remove from self
+    /// set parent  > parent.add to self
+    /// remove parent > parent.remove from self
+    /// 
+    /// 
+    /// </summary>
+
+
+
 
     public bool AddTransform(Transform transform)
     {
-      if (!_children.Contains(transform))
-      {
-        _children.Add(transform); 
-        return true;
-      }
-      return false;
+      return transform.SetParentTransform(this);
     }
     public bool RemoveTransform(Transform transform)
     {
-      if (_children.Contains(transform))
+      return transform.RemoveParentTransform();
+    }
+    public bool SetParentTransform(Transform transform)
+    {
+      if (!transform._children.Contains(this))
       {
-        _children.Remove(transform);
+        if (Parent != null)
+        {
+          Parent._children.Remove(this);
+        }
+        Parent = transform;
+        Parent._children.Add(this);
         return true;
       }
       return false;
     }
-    public bool SetParentTransform(Transform transform)
+    public bool RemoveParentTransform()
     {
-      if (!transform._children.Contains(this))//if this is not a child to the new parent, continue
+      if (Parent != null)
       {
-        if (_parent != null)  //if this transform has a parent, remove self from old parents child-list, otherwise, continue
-        {
-          _parent.RemoveTransform(this);
-        }
-        _parent = transform;
-        _parent.AddTransform(this);
+        Parent.RemoveTransform(this);
+        Parent = null;
         return true;
       }
       return false;
+    }
+
+    public List<Transform> GetChildren()
+    {
+      return _children;
     }
 
     public Transform WorldTransform
     {
       get
       {
-        if (_parent == null)
+        if (Parent == null)
         {
           return this;
         }
