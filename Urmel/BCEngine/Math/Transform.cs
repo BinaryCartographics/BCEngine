@@ -41,37 +41,27 @@ namespace BCEngine.Math
     /// 
     /// </summary>
 
-
-
-
     public bool AddTransform(Transform transform)
     {
-      return transform.SetParentTransform(this);
-    }
-    public bool RemoveTransform(Transform transform)
-    {
-      return transform.RemoveParentTransform();
-    }
-    public bool SetParentTransform(Transform transform)
-    {
-      if (!transform._children.Contains(this))
+      if (!_children.Contains(transform))
       {
-        if (Parent != null)
+        if (transform.Parent != null)
         {
-          Parent._children.Remove(this);
+          transform.Parent._children.Remove(transform);
         }
-        Parent = transform;
-        Parent._children.Add(this);
-        return true;
+        transform.Parent = this;
+        _children.Add(transform);
+        return true;  
       }
       return false;
     }
-    public bool RemoveParentTransform()
+
+    public bool RemoveTransform(Transform transform)
     {
-      if (Parent != null)
+      if (_children.Contains(transform))
       {
-        Parent.RemoveTransform(this);
-        Parent = null;
+        transform.Parent = null;
+        _children.Remove(transform);
         return true;
       }
       return false;

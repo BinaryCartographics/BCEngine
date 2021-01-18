@@ -13,7 +13,7 @@ namespace BCEngineTests.Math
     }
 
     [Fact]
-    public void CanAddTransformToTransform()
+    public void CanAddChildTransformToTransform()
     {
       Transform transform1 = new Transform();
       Transform transform2 = new Transform();
@@ -21,6 +21,21 @@ namespace BCEngineTests.Math
 
       Assert.Contains(transform2, transform1.GetChildren());
       Assert.Equal(transform1, transform2.Parent);
+    }
+
+    [Fact]
+    public void CanRemoveChildTransformFromTransform()
+    {
+      Transform transform1 = new Transform();
+      Transform transform2 = new Transform();
+      transform1.AddTransform(transform2);
+
+      Assert.Contains(transform2, transform1.GetChildren());
+      Assert.Equal(transform1, transform2.Parent);
+
+      transform1.RemoveTransform(transform2);
+      Assert.DoesNotContain(transform2, transform1.GetChildren());
+      Assert.NotEqual(transform1, transform2.Parent);
     }
   }
 }
