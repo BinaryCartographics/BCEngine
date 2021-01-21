@@ -1,53 +1,44 @@
-﻿using BCEngine.Interfaces;
+﻿using BCEngine.Helpers;
+using BCEngine.Interfaces;
 using BCEngine.Math;
+using System.Collections.Generic;
 
 namespace BCEngineTests.Scenes
 {
   internal class MockIDrawable : IDrawable
   {
     public string Name { get; }
-    public IGameObject Parent { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    string IGameObject.Name => throw new System.NotImplementedException();
-
-    IGameObject IGameObject.Parent { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    Transform IGameObject.Transform { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    Transform IGameObject.WorldTransform => throw new System.NotImplementedException();
+    public Transform Transform { get; set; }
+    public Transform WorldTransform
+    {
+      get
+      {
+        if (Parent == null)
+        {
+          return this.Transform;
+        }
+        return Transform.Compose(Parent.Transform, this.Transform);
+      }
+    }
+    public IGameObject Parent { get; set; }
+    public IList<IGameObject> Children { get; }
 
     public MockIDrawable(string name)
     {
       Name = name;
     }
-
     public void Draw()
     {
-      //Method left intentionally empty
+      throw new System.NotImplementedException();
     }
-
     public bool AddGameObject(IGameObject gameObject)
     {
-      throw new System.NotImplementedException();
+      return this.AddGameObjectDefaultImplementation(gameObject);
     }
 
     public bool RemoveGameObject(IGameObject gameObject)
     {
-      throw new System.NotImplementedException();
-    }
-
-    void IDrawable.Draw()
-    {
-      throw new System.NotImplementedException();
-    }
-
-    bool IGameObject.AddGameObject(IGameObject gameObject)
-    {
-      throw new System.NotImplementedException();
-    }
-
-    bool IGameObject.RemoveGameObject(IGameObject gameObject)
-    {
-      throw new System.NotImplementedException();
+      return this.RemoveGameObjectDefaultImplementation(gameObject);
     }
   }
 }

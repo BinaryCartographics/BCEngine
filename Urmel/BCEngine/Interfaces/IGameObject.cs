@@ -1,4 +1,5 @@
 ﻿using BCEngine.Math;
+using System.Collections.Generic;
 
 namespace BCEngine.Interfaces
 {
@@ -6,6 +7,7 @@ namespace BCEngine.Interfaces
   {
     string Name { get; }
     IGameObject Parent { get; set; }
+    IList<IGameObject> Children { get; }
     Transform Transform { get; set; }
     Transform WorldTransform { get; }
 
