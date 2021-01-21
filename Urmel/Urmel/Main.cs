@@ -1,8 +1,11 @@
-﻿using BCEngine.Scenes;
+﻿using BCEngine.Math;
+using BCEngine.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Urmel
@@ -38,7 +41,6 @@ namespace Urmel
     {
       if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || TouchPanel.GetState().Any())
         Exit();
-
       base.Update(gameTime);
     }
 

@@ -21,6 +21,18 @@ namespace BCEngineTests.Scenes
       Scene scene = new Scene { BackgroundColor = expectedColor };
       Assert.Equal(expectedColor, scene.BackgroundColor);
     }
+    public static IEnumerable<object[]> ColorData()
+    {
+      var allData = new List<object[]>
+        {
+          new object[] { Color.Red },
+          new object[] { Color.Blue },
+          new object[] { Color.Green },
+          new object[] { Color.CornflowerBlue },
+        };
+
+      return allData;
+    }
 
     [Fact]
     public void CanAddObjectToScene()
@@ -136,17 +148,5 @@ namespace BCEngineTests.Scenes
       Assert.DoesNotContain(character, scene.Drawables);
     }
 
-    public static IEnumerable<object[]> ColorData()
-    {
-      var allData = new List<object[]>
-        {
-          new object[] { Color.Red },
-          new object[] { Color.Blue },
-          new object[] { Color.Green },
-          new object[] { Color.CornflowerBlue },
-        };
-
-      return allData;
-    }
   }
 }
