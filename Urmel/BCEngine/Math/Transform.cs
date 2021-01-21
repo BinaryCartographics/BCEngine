@@ -1,15 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BCEngine.Interfaces;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace BCEngine.Math
 {
-  public class Transform
+  public struct Transform
   {
-    ///private Transform _parent;
-    public Transform Parent { get; private set; }
-
-    private readonly List<Transform> _children;
-    public IReadOnlyList<Transform> Children { get; }
     public Vector2 Position { get; set; }
     public Vector2 Scale { get; set; }
     public float Rotation { get; set; }
@@ -24,66 +20,6 @@ namespace BCEngine.Math
         Rotation = MathHelper.ToRadians(value);
       }
     }
-    public Transform() 
-    {
-      _children = new List<Transform>();
-      Children = _children.AsReadOnly();
-    }
-
-    /// <summary>
-    /// 
-    /// 
-    /// add to self
-    /// remove from self
-    /// set parent  > parent.add to self
-    /// remove parent > parent.remove from self
-    /// 
-    /// 
-    /// </summary>
-
-    public bool AddTransform(Transform transform)
-    {
-      if (!_children.Contains(transform))
-      {
-        if (transform.Parent != null)
-        {
-          transform.Parent._children.Remove(transform);
-        }
-        transform.Parent = this;
-        _children.Add(transform);
-        return true;  
-      }
-      return false;
-    }
-
-    public bool RemoveTransform(Transform transform)
-    {
-      if (_children.Contains(transform))
-      {
-        transform.Parent = null;
-        _children.Remove(transform);
-        return true;
-      }
-      return false;
-    }
-
-    public List<Transform> GetChildren()
-    {
-      return _children;
-    }
-
-    public Transform WorldTransform
-    {
-      get
-      {
-        if (Parent == null)
-        {
-          return this;
-        }
-        return Transform.Compose(Parent, this);
-      }
-    }
-
     public static Transform Compose(Transform parent, Transform child)
     {
       Transform result = new Transform();
@@ -110,18 +46,18 @@ namespace BCEngine.Math
 
     public Vector2 InverseTransformVector(Vector2 point)
     {
-      Vector2 result = point - WorldTransform.Position;
-      result = Vector2.Transform(result, Matrix.CreateRotationZ(-WorldTransform.Rotation));
-      result /= WorldTransform.Scale;
+      Vector2 result = point - Position;
+      result = Vector2.Transform(result, Matrix.CreateRotationZ(-Rotation));
+      result /= Scale;
       return result;
     }
 
-    public Vector2 GetRelativePosition(Vector2 WorldPosition)
+    public Vector2 GetRelativePosition(Vector2 RelativeTo)
     {
       Transform result = new Transform();
-      result.Position = WorldPosition * -WorldTransform.Position;
-      result.Rotation = -WorldTransform.Rotation;
-      result.Scale = -WorldTransform.Scale;
+      result.Position = RelativeTo * -Position;
+      result.Rotation = -Rotation;
+      result.Scale = -Scale;
       return result.Position;
     }
   }
