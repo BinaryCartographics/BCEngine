@@ -56,7 +56,7 @@ namespace BCEngine.Scenes
 
       foreach (var drawable in _drawables)
       {
-        drawable.Draw();
+        drawable.Draw(graphicsDevice, spriteBatch);
       }
     }
   }

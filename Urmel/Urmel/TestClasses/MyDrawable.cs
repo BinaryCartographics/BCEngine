@@ -1,13 +1,17 @@
-﻿using BCEngine.Interfaces;
-using BCEngine.Math;
+﻿using BCEngine.Graphics;
 using BCEngine.Helpers;
+using BCEngine.Interfaces;
+using BCEngine.Math;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace BCEngineTests.Scenes
+namespace Urmel.TestClasses
 {
-  public class MockIGameObject : IGameObject
+  class MyDrawable : IDrawable
   {
     public string Name { get; }
+
+    public Sprite sprite;
     public Transform Transform { get; set; }
     public Transform WorldTransform
     {
@@ -19,12 +23,17 @@ namespace BCEngineTests.Scenes
     public IGameObject Parent { get; set; }
     public IList<IGameObject> Children { get; }
 
-    public MockIGameObject(string name)
+    public MyDrawable(string name)
     {
-      Children = new List<IGameObject>();
       Name = name;
     }
-
+    public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+    {
+      //TODO, draw a sprite
+      spriteBatch.Begin();
+      spriteBatch.Draw(sprite.texture, sprite.position, sprite.sourceRectangle, sprite.color, sprite.rotation, sprite.origin, sprite.scale, SpriteEffects.None, 0f);
+      spriteBatch.End();
+    }
     public bool AddGameObject(IGameObject gameObject)
     {
       return this.AddGameObjectDefaultImplementation(gameObject);

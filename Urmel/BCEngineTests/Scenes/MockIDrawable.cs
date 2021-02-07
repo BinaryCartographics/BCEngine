@@ -1,6 +1,7 @@
 ﻿using BCEngine.Helpers;
 using BCEngine.Interfaces;
 using BCEngine.Math;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace BCEngineTests.Scenes
@@ -13,11 +14,7 @@ namespace BCEngineTests.Scenes
     {
       get
       {
-        if (Parent == null)
-        {
-          return this.Transform;
-        }
-        return Transform.Compose(Parent.Transform, this.Transform);
+        return this.WorldTransformDefaultImplementation();
       }
     }
     public IGameObject Parent { get; set; }
@@ -27,7 +24,7 @@ namespace BCEngineTests.Scenes
     {
       Name = name;
     }
-    public void Draw()
+    public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
       throw new System.NotImplementedException();
     }

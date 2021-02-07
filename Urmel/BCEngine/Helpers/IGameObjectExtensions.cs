@@ -1,4 +1,5 @@
 ﻿using BCEngine.Interfaces;
+using BCEngine.Math;
 
 namespace BCEngine.Helpers
 {
@@ -28,6 +29,15 @@ namespace BCEngine.Helpers
         return true;
       }
       return false;
+    }
+
+    public static Transform WorldTransformDefaultImplementation(this IGameObject gameObject)
+    {
+      if (gameObject.Parent == null)
+      {
+        return gameObject.Transform;
+      }
+      return Transform.Compose(gameObject.Parent.Transform, gameObject.Transform);
     }
   }
 }
