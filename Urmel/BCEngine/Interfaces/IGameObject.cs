@@ -7,7 +7,7 @@ namespace BCEngine.Interfaces
   {
     string Name { get; }
     IGameObject Parent { get; set; }
-    IList<IGameObject> Children { get; }
+    IReadOnlyList<IGameObject> Children { get; }
     Transform Transform { get; set; }
     Transform WorldTransform { get; }
 

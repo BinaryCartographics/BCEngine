@@ -1,17 +1,26 @@
-﻿using BCEngine.Graphics;
-using BCEngine.Helpers;
+﻿using BCEngine.Helpers;
 using BCEngine.Interfaces;
 using BCEngine.Math;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace Urmel.TestClasses
 {
-  class MyDrawable : IDrawable
+  class MyDrawable : BCEngine.Interfaces.IDrawable
   {
     public string Name { get; }
 
-    public Sprite sprite;
+    public Texture2D sprite;
+
+
+    /// <summary>
+    /// id like to know why the fuck i cant do this in MyDrawable.cs, but its completely fucking fine in MockIDrawable.cs
+    /// </summary>
+#pragma warning disable S1450 // Private fields only used as local variables in methods should become local variables
+    private readonly List<IGameObject> _children;
+#pragma warning restore S1450 // Private fields only used as local variables in methods should become local variables
+
     public Transform Transform { get; set; }
     public Transform WorldTransform
     {
@@ -21,19 +30,23 @@ namespace Urmel.TestClasses
       }
     }
     public IGameObject Parent { get; set; }
-    public IList<IGameObject> Children { get; }
+    public IReadOnlyList<IGameObject> Children { get; }
 
-    public MyDrawable(string name)
+    public MyDrawable(string name, Texture2D texture2D)
     {
-      Name = name;
+      sprite = texture2D;
+      this.Name = name;
+      _children = new List<IGameObject>();
+      Children = _children.AsReadOnly();
     }
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
       //TODO, draw a sprite
       spriteBatch.Begin();
-      spriteBatch.Draw(sprite.texture, sprite.position, sprite.sourceRectangle, sprite.color, sprite.rotation, sprite.origin, sprite.scale, SpriteEffects.None, 0f);
+      spriteBatch.Draw(sprite, this.WorldTransform.Position, Color.White);
       spriteBatch.End();
     }
+
     public bool AddGameObject(IGameObject gameObject)
     {
       return this.AddGameObjectDefaultImplementation(gameObject);

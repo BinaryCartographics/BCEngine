@@ -6,9 +6,10 @@ using System.Collections.Generic;
 
 namespace BCEngineTests.Scenes
 {
-  internal class MockIDrawable : IDrawable
+  internal class MockIDrawable : BCEngine.Interfaces.IDrawable
   {
     public string Name { get; }
+
     public Transform Transform { get; set; }
     public Transform WorldTransform
     {
@@ -18,11 +19,15 @@ namespace BCEngineTests.Scenes
       }
     }
     public IGameObject Parent { get; set; }
-    public IList<IGameObject> Children { get; }
+
+    private readonly List<IGameObject> _children;
+    public IReadOnlyList<IGameObject> Children { get; }
 
     public MockIDrawable(string name)
     {
       Name = name;
+      _children = new List<IGameObject>();
+      Children = _children.AsReadOnly();
     }
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
