@@ -42,9 +42,7 @@ namespace Urmel.TestClasses
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
       //TODO, draw a sprite
-      spriteBatch.Begin();
-      spriteBatch.Draw(sprite, this.WorldTransform.Position, Color.White);
-      spriteBatch.End();
+      spriteBatch.Draw(sprite, WorldTransform.Position, Color.White);
     }
 
     public bool AddGameObject(IGameObject gameObject)

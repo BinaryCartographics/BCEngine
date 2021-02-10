@@ -93,5 +93,64 @@ namespace BCEngine.Math
       result.Scale = -transform.Scale;
       return result.Position;
     }
+
+    /// <summary>
+    /// Sets the local position of a transform to the value of Vector2
+    /// </summary>
+    /// <param name="transform">Transform to have its position modified</param>
+    /// <param name="Position">Position to be set on the transform</param>
+    /// <returns>new transform with local position applied</returns>
+    public static Transform SetPosition(Transform transform, Vector2 Position)
+    {
+      transform.Position = Position;
+      return transform;
+    }
+
+    /// <summary>
+    /// Sets the local scale of a transform to the value of Vector2
+    /// </summary>
+    /// <param name="transform">Transform to have its position modified</param>
+    /// <param name="scale">Scale to be set on the transform</param>
+    /// <returns>new transform with local scale applied</returns>
+    public static Transform SetScale(Transform transform, Vector2 scale)
+    {
+      transform.Scale = scale;
+      return transform;
+    }
+
+    /// <summary>
+    /// Sets the local rotation of a transform to the value of a float
+    /// </summary>
+    /// <param name="transform">Transform to have its position modified</param>
+    /// <param name="rotation">Rotation to be set on the transform</param>
+    /// <returns>new transform with local rotation applied</returns>
+    public static Transform SetRotation(Transform transform, float rotation)
+    {
+      transform.Rotation = rotation;
+      return transform;
+    }
+
+    /// <summary>
+    /// Translates a transform in local space by the value of a vector2
+    /// </summary>
+    /// <param name="transform">Transform to be translated</param>
+    /// <param name="Translation">translation amount</param>
+    /// <returns>new transform with local translation applied</returns>
+    public static Transform Translate(Transform transform, Vector2 Translation)
+    {
+      transform.Position += Translation;
+      return transform;
+    }
+    /// <summary>
+    /// Translates a transform in local space by the value of a vector2
+    /// </summary>
+    /// <param name="transform">Transform to be translated</param>
+    /// <param name="Translation">translation amount</param>
+    /// <returns>new transform with local translation applied</returns>
+    public static Transform Rotate(Transform transform, float rotation)
+    {
+      transform.Rotation += rotation;
+      return transform;
+    }
   }
 }

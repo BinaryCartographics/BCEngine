@@ -54,10 +54,12 @@ namespace BCEngine.Scenes
       var color = BackgroundColor;
       graphicsDevice.Clear(color);
 
+      spriteBatch.Begin();
       foreach (var drawable in _drawables)
       {
         drawable.Draw(graphicsDevice, spriteBatch);
       }
+      spriteBatch.End();
     }
   }
 }
