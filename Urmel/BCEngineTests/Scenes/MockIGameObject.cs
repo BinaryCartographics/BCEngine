@@ -17,22 +17,25 @@ namespace BCEngineTests.Scenes
       }
     }
     public IGameObject Parent { get; set; }
-    public IList<IGameObject> Children { get; }
+
+    private readonly List<IGameObject> _children;
+    public IReadOnlyList<IGameObject> Children { get; }
 
     public MockIGameObject(string name)
     {
-      Children = new List<IGameObject>();
       Name = name;
+      _children = new List<IGameObject>();
+      Children = _children.AsReadOnly();
     }
 
     public bool AddGameObject(IGameObject gameObject)
     {
-      return this.AddGameObjectDefaultImplementation(gameObject);
+      return this.AddGameObjectDefaultImplementation(gameObject, _children);
     }
 
     public bool RemoveGameObject(IGameObject gameObject)
     {
-      return this.RemoveGameObjectDefaultImplementation(gameObject);
+      return this.RemoveGameObjectDefaultImplementation(gameObject, _children);
     }
   }
 }

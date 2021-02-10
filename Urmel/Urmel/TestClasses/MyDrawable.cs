@@ -49,12 +49,12 @@ namespace Urmel.TestClasses
 
     public bool AddGameObject(IGameObject gameObject)
     {
-      return this.AddGameObjectDefaultImplementation(gameObject);
+      return this.AddGameObjectDefaultImplementation(gameObject, _children);
     }
 
     public bool RemoveGameObject(IGameObject gameObject)
     {
-      return this.RemoveGameObjectDefaultImplementation(gameObject);
+      return this.RemoveGameObjectDefaultImplementation(gameObject, _children);
     }
   }
 }

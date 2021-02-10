@@ -66,6 +66,7 @@ namespace BCEngine.Math
     }
     /// <summary>
     /// Transforms the vector x, y from world space to local space. The opposite of Transform.TransformVector
+    /// if the transform is a child object, world space refers to parent space
     /// </summary>
     /// <param name="point">world space vector2</param>
     /// <param name="transform">transform to localise point into</param>
@@ -81,13 +82,13 @@ namespace BCEngine.Math
     /// <summary>
     /// Gets the relative position from a transform relative to a world space vector2
     /// </summary>
-    /// <param name="RelativeTo">the reference point to measure the relative distance from</param>
+    /// <param name="relativeTo">the reference point to measure the relative distance from</param>
     /// <param name="transform">the transform to measure to</param>
     /// <returns>relative position Vector2</returns>
-    public static Vector2 GetRelativePosition(Transform transform, Vector2 RelativeTo)
+    public static Vector2 GetRelativePosition(Transform transform, Vector2 relativeTo)
     {
       Transform result = new Transform();
-      result.Position = RelativeTo * -transform.Position;
+      result.Position = relativeTo * -transform.Position;
       result.Rotation = -transform.Rotation;
       result.Scale = -transform.Scale;
       return result.Position;

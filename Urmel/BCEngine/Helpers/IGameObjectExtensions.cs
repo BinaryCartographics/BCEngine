@@ -1,31 +1,32 @@
 ﻿using BCEngine.Interfaces;
 using BCEngine.Math;
+using System.Collections.Generic;
 
 namespace BCEngine.Helpers
 {
   public static class IGameObjectExtensions
   {
-    public static bool AddGameObjectDefaultImplementation(this IGameObject Parent, IGameObject gameObject)
+    public static bool AddGameObjectDefaultImplementation(this IGameObject Parent, IGameObject gameObject, IList<IGameObject> children)
     {
-      if (!Parent.Children.Contains(gameObject))
+      if (!children.Contains(gameObject))
       {
         if (gameObject.Parent != null)
         {
           gameObject.Parent.RemoveGameObject(gameObject);
         }
         gameObject.Parent = Parent;
-        Parent.Children.Add(Parent);
+        children.Add(Parent);
         return true;
       }
       return false;
     }
 
-    public static bool RemoveGameObjectDefaultImplementation(this IGameObject Parent, IGameObject gameObject)
+    public static bool RemoveGameObjectDefaultImplementation(this IGameObject Parent, IGameObject gameObject, IList<IGameObject> children)
     {
-      if (Parent.Children.Contains(gameObject))
+      if (children.Contains(gameObject))
       {
-        gameObject.Parent = null;
-        Parent.Children.Remove(gameObject);
+
+        children.Remove(gameObject);
         return true;
       }
       return false;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BCEngineTests.Scenes
 {
-  internal class MockIDrawable : BCEngine.Interfaces.IDrawable
+  internal class MockIDrawable : IDrawable
   {
     public string Name { get; }
 
@@ -35,12 +35,12 @@ namespace BCEngineTests.Scenes
     }
     public bool AddGameObject(IGameObject gameObject)
     {
-      return this.AddGameObjectDefaultImplementation(gameObject);
+      return this.AddGameObjectDefaultImplementation(gameObject, _children);
     }
 
     public bool RemoveGameObject(IGameObject gameObject)
     {
-      return this.RemoveGameObjectDefaultImplementation(gameObject);
+      return this.RemoveGameObjectDefaultImplementation(gameObject, _children);
     }
   }
 }
