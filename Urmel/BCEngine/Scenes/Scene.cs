@@ -54,7 +54,7 @@ namespace BCEngine.Scenes
       var color = BackgroundColor;
       graphicsDevice.Clear(color);
 
-      spriteBatch.Begin();
+      spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.DepthRead, RasterizerState.CullNone, null, null);
       foreach (var drawable in _drawables)
       {
         drawable.Draw(graphicsDevice, spriteBatch);

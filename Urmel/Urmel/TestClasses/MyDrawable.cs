@@ -11,17 +11,8 @@ namespace Urmel.TestClasses
   {
     public string Name { get; }
 
-    public Texture2D sprite;
-
-
-    /// <summary>
-    /// id like to know why the fuck i cant do this in MyDrawable.cs, but its completely fucking fine in MockIDrawable.cs
-    /// </summary>
-#pragma warning disable S1450 // Private fields only used as local variables in methods should become local variables
     private readonly List<IGameObject> _children;
-#pragma warning restore S1450 // Private fields only used as local variables in methods should become local variables
-
-    public Transform Transform { get; set; }
+    public Transform Transform { get; set; } = Transform.Identity;
     public Transform WorldTransform
     {
       get
@@ -31,18 +22,24 @@ namespace Urmel.TestClasses
     }
     public IGameObject Parent { get; set; }
     public IReadOnlyList<IGameObject> Children { get; }
+    public Texture2D Texture { get; set; }
+    public Vector2 Origin { get; set; }
+    public Rectangle Bounds { get; set; }
+    public Rectangle SourceRectangle { get; set; }
+    public Color Color { get; set; } = Color.White;
+    public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
+    public float LayerDepth { get; set; } = 0f;
 
     public MyDrawable(string name, Texture2D texture2D)
     {
-      sprite = texture2D;
-      this.Name = name;
+      Texture = texture2D;
+      Name = name;
       _children = new List<IGameObject>();
       Children = _children.AsReadOnly();
-    }
-    public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
-    {
-      //TODO, draw a sprite
-      spriteBatch.Draw(sprite, WorldTransform.Position, Color.White);
+
+      SourceRectangle = Texture.Bounds;
+      Bounds = Texture.Bounds;
+      Origin = new Vector2(Bounds.Width / 2, Bounds.Height / 2);
     }
 
     public bool AddGameObject(IGameObject gameObject)
@@ -53,6 +50,10 @@ namespace Urmel.TestClasses
     public bool RemoveGameObject(IGameObject gameObject)
     {
       return this.RemoveGameObjectDefaultImplementation(gameObject, _children);
+    }
+    public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+    {
+      this.DrawDefaultImplementation(spriteBatch, LayerDepth);
     }
   }
 }
