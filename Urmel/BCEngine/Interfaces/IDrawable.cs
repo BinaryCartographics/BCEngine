@@ -5,7 +5,6 @@ namespace BCEngine.Interfaces
 {
   public interface IDrawable : IGameObject
   {
-    Texture2D Texture { get; set; }
     Vector2 Origin { get; set; }
     Rectangle Bounds { get; set; }
     Rectangle SourceRectangle { get; set; }
