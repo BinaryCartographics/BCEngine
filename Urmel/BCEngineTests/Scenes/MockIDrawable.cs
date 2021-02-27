@@ -22,6 +22,12 @@ namespace BCEngineTests.Scenes
 
     private readonly List<IGameObject> _children;
     public IReadOnlyList<IGameObject> Children { get; }
+    public Microsoft.Xna.Framework.Vector2 Origin { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public Microsoft.Xna.Framework.Rectangle Bounds { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public Microsoft.Xna.Framework.Rectangle SourceRectangle { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public Microsoft.Xna.Framework.Color Color { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public SpriteEffects SpriteEffects { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public float LayerDepth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     public MockIDrawable(string name)
     {

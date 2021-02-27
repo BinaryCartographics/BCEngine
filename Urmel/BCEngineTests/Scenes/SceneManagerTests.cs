@@ -16,7 +16,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCanAddScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene sceneToAdd = new Scene();
+      MyScene sceneToAdd = new MyScene();
       Assert.True(sceneManager.AddScene(sceneToAdd));
     }
 
@@ -24,7 +24,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerContainsAddedScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene sceneToAdd = new Scene();
+      MyScene sceneToAdd = new MyScene();
       sceneManager.AddScene(sceneToAdd);
       Assert.Contains(sceneToAdd, sceneManager.Scenes);
     }
@@ -33,7 +33,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCannotAddSameSceneTwice()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene sceneToAdd = new Scene();
+      MyScene sceneToAdd = new MyScene();
       sceneManager.AddScene(sceneToAdd);
       Assert.False(sceneManager.AddScene(sceneToAdd));
     }
@@ -42,8 +42,8 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCanHaveMultipleScenesAdded()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene sceneToAdd = new Scene();
-      Scene otherScene = new Scene();
+      MyScene sceneToAdd = new MyScene();
+      MyScene otherScene = new MyScene();
       Assert.True(sceneManager.AddScene(sceneToAdd));
       Assert.True(sceneManager.AddScene(otherScene));
     }
@@ -52,9 +52,9 @@ namespace BCEngineTests.Scenes
     public void SceneManagerContainsMultipleScenes()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene sceneToAdd = new Scene();
+      Scene sceneToAdd = new MyScene();
       sceneManager.AddScene(sceneToAdd);
-      Scene otherScene = new Scene();
+      Scene otherScene = new MyScene();
       sceneManager.AddScene(otherScene);
 
       Assert.Contains(sceneToAdd, sceneManager.Scenes);

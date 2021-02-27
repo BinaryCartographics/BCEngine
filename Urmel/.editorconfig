@@ -14,3 +14,6 @@ dotnet_diagnostic.S1450.severity = none
 
 # S927: Parameter names should match base declaration and other partial definitions
 dotnet_diagnostic.S927.severity = none
+
+# CS0006: Metadata file 'C:\Users\45squ\Documents\GitHub\BCEngine\Urmel\Urmel\bin\x64\Debug\netstandard2.0\Urmel.dll' could not be found
+dotnet_diagnostic.CS0006.severity = warning
