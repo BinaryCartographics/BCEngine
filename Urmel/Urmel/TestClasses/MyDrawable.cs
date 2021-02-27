@@ -53,7 +53,7 @@ namespace Urmel.TestClasses
     }
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
-      this.DrawDefaultImplementation(spriteBatch, LayerDepth);
+      this.DrawDefaultImplementation(Texture, spriteBatch, LayerDepth);
     }
   }
 }

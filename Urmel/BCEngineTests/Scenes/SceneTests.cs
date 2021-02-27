@@ -1,4 +1,5 @@
 ﻿using BCEngine.Scenes;
+using Urmel.TestClasses;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Xunit;
@@ -10,7 +11,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void SceneConstructorDoesntCrash()
     {
-      Scene scene = new Scene();
+      MyScene scene = new MyScene();
       Assert.NotNull(scene);
     }
 
@@ -18,7 +19,7 @@ namespace BCEngineTests.Scenes
     [MemberData(nameof(ColorData))]
     public void SetBackgroundColorIsReturnedOnGet(Color expectedColor)
     {
-      Scene scene = new Scene { BackgroundColor = expectedColor };
+      MyScene scene = new MyScene { BackgroundColor = expectedColor };
       Assert.Equal(expectedColor, scene.BackgroundColor);
     }
     public static IEnumerable<object[]> ColorData()
@@ -37,7 +38,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void CanAddObjectToScene()
     {
-      Scene scene = new Scene();
+      MyScene scene = new MyScene();
       MockIGameObject character = new MockIGameObject("A name");
       Assert.True(scene.AddGameObject(character));
     }
@@ -45,7 +46,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void ObjectAddedToSceneIsInGameObjectsCollection()
     {
-      Scene scene = new Scene();
+      MyScene scene = new MyScene();
       MockIGameObject character = new MockIGameObject("A name");
       scene.AddGameObject(character);
       Assert.Contains(character, scene.GameObjects);

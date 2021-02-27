@@ -6,6 +6,12 @@ namespace BCEngine.Math
 {
   public struct Transform
   {
+    private static Transform _identity = new Transform()
+    {
+      Position = Vector2.Zero,
+      Scale = Vector2.One,
+      Rotation = 0f
+    };
     public Vector2 Position { get; set; }
     public Vector2 Scale { get; set; }
     public float Rotation { get; set; }
@@ -21,12 +27,6 @@ namespace BCEngine.Math
       }
     }
 
-    private static Transform _identity = new Transform()
-    {
-      Position = Vector2.Zero,
-      Scale = Vector2.One,
-      Rotation = 0f
-    };
     public static Transform Identity 
     {
       get { return _identity; }
