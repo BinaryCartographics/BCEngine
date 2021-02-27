@@ -111,11 +111,11 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="..\Urmel\Content\Content.mgcb" />
+    <None Include="Content\Content.mgcb" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="..\Urmel\Content\Content.mgcb" Visible="false" />
+    <MonoGameContentReference Include="Content\Content.mgcb" Visible="false" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
