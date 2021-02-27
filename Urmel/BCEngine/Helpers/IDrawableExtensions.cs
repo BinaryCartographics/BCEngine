@@ -8,7 +8,8 @@ namespace BCEngine.Helpers
   {
     public static bool DrawDefaultImplementation(this IDrawable Parent, Texture2D texture, SpriteBatch spriteBatch, float LayerDepth)
     {
-      spriteBatch.Draw(texture, Parent.WorldTransform.Position, Parent.SourceRectangle, Parent.Color, Parent.WorldTransform.Rotation, Parent.Origin, Parent.WorldTransform.Scale, SpriteEffects.None, LayerDepth);
+      spriteBatch.Draw(texture, Parent.WorldTransform.Position, Parent.SourceRectangle, Parent.Color, 
+        Parent.WorldTransform.Rotation, Parent.Origin, Parent.WorldTransform.Scale, SpriteEffects.None, LayerDepth);
       return true;
     }
   }

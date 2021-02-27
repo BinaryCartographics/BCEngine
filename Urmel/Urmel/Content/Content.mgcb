@@ -25,6 +25,24 @@
 /processorParam:TextureFormat=Color
 /build:bcflag.png
 
+#begin Effects/CrtEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/CrtEffect.fx
+
+#begin Effects/GaussianBlur.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/GaussianBlur.fx
+
+#begin Effects/Glow.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/Glow.fx
+
 #begin tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor
