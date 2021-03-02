@@ -18,12 +18,12 @@ namespace Urmel.Scenes
       FinalRenderTarget = new RenderTarget2D(graphicsDevice, 200, 150);
 
       Effect gEffect = content.Load<Effect>("Effects/CrtEffect");
+      myDrawable = new MyDrawable("testing", content.Load<Texture2D>("Textures/bcflag"));
 
       PipelineEffect BlurTestEffect = new PipelineEffect(gEffect, 200, 150);
 
       MyMaterial = new PipelineMaterial(BlurTestEffect);
       MyPass = new PipelinePass(FinalRenderTarget);
-      myDrawable = new MyDrawable("testing", content.Load<Texture2D>("Textures/bcflag"));
       myDrawable.SetScale(Vector2.One * 5);
       AddRenderPass(MyPass);
       AddGameObject(myDrawable, MyPass);

@@ -11,7 +11,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void SceneConstructorDoesntCrash()
     {
-      MyScene scene = new MyScene();
+      MockScene scene = new MockScene(null);
       Assert.NotNull(scene);
     }
 
@@ -19,7 +19,7 @@ namespace BCEngineTests.Scenes
     [MemberData(nameof(ColorData))]
     public void SetBackgroundColorIsReturnedOnGet(Color expectedColor)
     {
-      MyScene scene = new MyScene { BackgroundColor = expectedColor };
+      MockScene scene = new MockScene(null) { BackgroundColor = expectedColor };
       Assert.Equal(expectedColor, scene.BackgroundColor);
     }
     public static IEnumerable<object[]> ColorData()
@@ -38,7 +38,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void CanAddObjectToScene()
     {
-      MyScene scene = new MyScene();
+      MockScene scene = new MockScene(null);
       MockIGameObject character = new MockIGameObject("A name");
       Assert.True(scene.AddGameObject(character));
     }
@@ -46,7 +46,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void ObjectAddedToSceneIsInGameObjectsCollection()
     {
-      MyScene scene = new MyScene();
+      MockScene scene = new MockScene(null);
       MockIGameObject character = new MockIGameObject("A name");
       scene.AddGameObject(character);
       Assert.Contains(character, scene.GameObjects);
@@ -55,7 +55,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void CannotAddSameObjectTwice()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIGameObject character = new MockIGameObject("A name");
       scene.AddGameObject(character);
       Assert.False(scene.AddGameObject(character));
@@ -64,7 +64,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void CanAddMultipleObjects()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIGameObject character = new MockIGameObject("A name");
       MockIGameObject character2 = new MockIGameObject("B name");
       Assert.True(scene.AddGameObject(character));
@@ -74,7 +74,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void MultipleObjectsAreAddedToCollection()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIGameObject character = new MockIGameObject("A name");
       MockIGameObject character2 = new MockIGameObject("B name");
       scene.AddGameObject(character);
@@ -87,7 +87,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void CanRemoveObjectFromScene()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIGameObject character = new MockIGameObject("A name");
       scene.AddGameObject(character);
       Assert.True(scene.RemoveGameObject(character));
@@ -96,7 +96,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void ObjectIsRemovedFromScene()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIGameObject character = new MockIGameObject("A name");
       scene.AddGameObject(character);
       scene.RemoveGameObject(character);
@@ -106,7 +106,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void CanAddIDrawablesCorrectly()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIDrawable character = new MockIDrawable("Dave");
       Assert.True(scene.AddGameObject(character));
     }
@@ -114,7 +114,7 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void IDrawablesGetAddedToGameObjects()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIDrawable character = new MockIDrawable("Dave");
       scene.AddGameObject(character);
       Assert.Contains(character, scene.GameObjects);
@@ -123,31 +123,11 @@ namespace BCEngineTests.Scenes
     [Fact]
     public void IDrawablesGetRemovedFromGameObjects()
     {
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       MockIDrawable character = new MockIDrawable("Dave");
       scene.AddGameObject(character);
       scene.RemoveGameObject(character);
       Assert.DoesNotContain(character, scene.GameObjects);
     }
-
-    [Fact]
-    public void IDrawablesGetAddedToDrawables()
-    {
-      Scene scene = new Scene();
-      MockIDrawable character = new MockIDrawable("Dave");
-      scene.AddGameObject(character);
-      Assert.Contains(character, scene.Drawables);
-    }
-
-    [Fact]
-    public void IDrawablesGetRemovedFromDrawables()
-    {
-      Scene scene = new Scene();
-      MockIDrawable character = new MockIDrawable("Dave");
-      scene.AddGameObject(character);
-      scene.RemoveGameObject(character);
-      Assert.DoesNotContain(character, scene.Drawables);
-    }
-
   }
 }

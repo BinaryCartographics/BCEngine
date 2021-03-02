@@ -16,7 +16,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCanAddScene()
     {
       SceneManager sceneManager = new SceneManager();
-      MyScene sceneToAdd = new MyScene();
+      MockScene sceneToAdd = new MockScene(null);
       Assert.True(sceneManager.AddScene(sceneToAdd));
     }
 
@@ -24,7 +24,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerContainsAddedScene()
     {
       SceneManager sceneManager = new SceneManager();
-      MyScene sceneToAdd = new MyScene();
+      MockScene sceneToAdd = new MockScene(null);
       sceneManager.AddScene(sceneToAdd);
       Assert.Contains(sceneToAdd, sceneManager.Scenes);
     }
@@ -33,7 +33,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCannotAddSameSceneTwice()
     {
       SceneManager sceneManager = new SceneManager();
-      MyScene sceneToAdd = new MyScene();
+      MockScene sceneToAdd = new MockScene(null);
       sceneManager.AddScene(sceneToAdd);
       Assert.False(sceneManager.AddScene(sceneToAdd));
     }
@@ -42,8 +42,8 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCanHaveMultipleScenesAdded()
     {
       SceneManager sceneManager = new SceneManager();
-      MyScene sceneToAdd = new MyScene();
-      MyScene otherScene = new MyScene();
+      MockScene sceneToAdd = new MockScene(null);
+      MockScene otherScene = new MockScene(null);
       Assert.True(sceneManager.AddScene(sceneToAdd));
       Assert.True(sceneManager.AddScene(otherScene));
     }
@@ -52,9 +52,9 @@ namespace BCEngineTests.Scenes
     public void SceneManagerContainsMultipleScenes()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene sceneToAdd = new MyScene();
+      MockScene sceneToAdd = new MockScene(null);
       sceneManager.AddScene(sceneToAdd);
-      Scene otherScene = new MyScene();
+      MockScene otherScene = new MockScene(null);
       sceneManager.AddScene(otherScene);
 
       Assert.Contains(sceneToAdd, sceneManager.Scenes);
@@ -65,7 +65,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCanNavigateToScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       sceneManager.AddScene(scene);
 
       Assert.True(sceneManager.NavigateToScene(scene));
@@ -75,7 +75,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCurrentSceneUpdatesWhenNavigatingToScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       sceneManager.AddScene(scene);
 
       sceneManager.NavigateToScene(scene);
@@ -87,7 +87,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCannotNavigateToSceneNotAdded()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
 
       Assert.False(sceneManager.NavigateToScene(scene));
     }
@@ -96,7 +96,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCannotNavigateToCurrentScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       sceneManager.AddScene(scene);
 
       sceneManager.NavigateToScene(scene);
@@ -107,7 +107,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCanRemoveScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       sceneManager.AddScene(scene);
 
       Assert.True(sceneManager.RemoveScene(scene));
@@ -117,7 +117,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCannotRemoveSceneThatDidntExist()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
 
       Assert.False(sceneManager.RemoveScene(scene));
     }
@@ -126,7 +126,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerCannotRemoveCurrentScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       sceneManager.AddScene(scene);
       sceneManager.NavigateToScene(scene);
       Assert.False(sceneManager.RemoveScene(scene));
@@ -136,7 +136,7 @@ namespace BCEngineTests.Scenes
     public void SceneManagerDoesNotContainRemovedScene()
     {
       SceneManager sceneManager = new SceneManager();
-      Scene scene = new Scene();
+      MockScene scene = new MockScene(null);
       sceneManager.AddScene(scene);
 
       sceneManager.RemoveScene(scene);
