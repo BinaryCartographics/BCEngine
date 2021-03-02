@@ -1,4 +1,5 @@
-﻿using BCEngine.Helpers;
+﻿using BCEngine.Graphics;
+using BCEngine.Helpers;
 using BCEngine.Interfaces;
 using BCEngine.Math;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,11 +30,16 @@ namespace BCEngineTests.Scenes
     public SpriteEffects SpriteEffects { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public float LayerDepth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
+    public IReadOnlyList<RenderPass> AttachedRenderPasses { get; }
+    private List<RenderPass> _attachedRenderPasses;
     public MockIDrawable(string name)
     {
       Name = name;
       _children = new List<IGameObject>();
       Children = _children.AsReadOnly();
+
+      _attachedRenderPasses = new List<RenderPass>();
+      AttachedRenderPasses = _attachedRenderPasses.AsReadOnly();
     }
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
@@ -47,6 +53,16 @@ namespace BCEngineTests.Scenes
     public bool RemoveGameObject(IGameObject gameObject)
     {
       return this.RemoveGameObjectDefaultImplementation(gameObject, _children);
+    }
+
+    public void AddRenderPass(RenderPass renderPass)
+    {
+      throw new System.NotImplementedException();
+    }
+
+    public void RemoveRenderPass(RenderPass renderPass)
+    {
+      throw new System.NotImplementedException();
     }
   }
 }

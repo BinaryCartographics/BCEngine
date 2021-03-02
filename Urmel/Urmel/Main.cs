@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System.Linq;
+using Urmel.Scenes;
+using Urmel.Scenes.GaussianBlurTestSceneClasses;
 using Urmel.TestClasses;
 
 namespace Urmel
@@ -13,9 +15,7 @@ namespace Urmel
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private readonly SceneManager _sceneManager;
-    MyScene scene;
-    MyEffect MyGaussianEffect;
-    MyMaterial MyGaussianMaterial;
+    PipelineTestScene gaussianBlurTestScene;
     public Main()
     {
       _graphics = new GraphicsDeviceManager(this);
@@ -32,18 +32,11 @@ namespace Urmel
 
     protected override void LoadContent()
     {
-      var GaussianEffect = Content.Load<Effect>("Effects/GaussianBlur");
-      MyGaussianEffect = new MyEffect(GaussianEffect);
-      MyGaussianMaterial = new MyMaterial(MyGaussianEffect);
-      ///
-      ///Leave this at the bottom, we can load content before we load scenes
-      ///
+      gaussianBlurTestScene = new PipelineTestScene(GraphicsDevice, Content);
+
+      _sceneManager.AddScene(gaussianBlurTestScene);
+      _sceneManager.NavigateToScene(gaussianBlurTestScene);
       _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-      scene = new MyScene() { BackgroundColor = new Color(0x00, 0x80, 0x80) };
-
-      _sceneManager.AddScene(scene);
-      _sceneManager.NavigateToScene(scene);
     }
 
     protected override void Update(GameTime gameTime)

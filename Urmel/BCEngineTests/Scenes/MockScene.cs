@@ -2,27 +2,28 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Urmel.TestClasses
+namespace BCEngineTests.Scenes
 {
-  public class MyScene : Scene
+  class MockScene : Scene
   {
-    public MyScene()
-    {
+    public MockScene(GraphicsDevice graphicsDevice) : base(graphicsDevice)
+    { 
 
+    
     }
     public override void OnSceneEnter()
-    { 
-      //background is black, begin fading in
+    {
+      //nothing
     }
 
     public override void OnSceneExit()
     {
-      //begin fading out to black or something
+      //nothing
     }
 
     public override void OnUpdate(GameTime gameTime)
     {
-      throw new System.NotImplementedException();
+      //nothing  
     }
   }
 }

@@ -1,8 +1,8 @@
 
 #----------------------------- Global Properties ----------------------------#
 
-/outputDir:bin/$(Platform)
-/intermediateDir:obj/$(Platform)
+/outputDir:bin
+/intermediateDir:obj
 /platform:Android
 /config:
 /profile:Reach
@@ -13,7 +13,19 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin bcflag.png
+#begin ../../Urmel/Content/Effects/CrtEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:../../Urmel/Content/Effects/CrtEffect.fx;Effects/CrtEffect.fx
+
+#begin ../../Urmel/Content/Effects/Glow.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:../../Urmel/Content/Effects/Glow.fx;Effects/Glow.fx
+
+#begin ../../Urmel/Content/Textures/bcflag.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,5 +35,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:bcflag.png
+/build:../../Urmel/Content/Textures/bcflag.png;Textures/bcflag.png
+
+#begin ../../Urmel/Content/Textures/tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../Urmel/Content/Textures/tileset.png;Textures/tileset.png
 

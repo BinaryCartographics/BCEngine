@@ -11,31 +11,28 @@ namespace BCEngine.Graphics
     /// passing a render target in by reference and reusing it for multiple 
     /// passes may be more efficient than using a render target per render pass
     /// </summary>
-    private RenderTarget2D _renderTarget { get; }
+    public RenderTarget2D RenderTarget { get; set; }
 
     /// <summary>
     /// The material used to complete the render pass with, responsible for handling 
     /// the shader and its parameters, which create the visual effects for your game
     /// </summary>
-    private Material Material { get; }
+    public Material Material { get; set; }
 
     /// <summary>
     /// the drawables to be drawn in the current render pass
     /// </summary>
     private readonly List<IDrawable> _drawables;
 
-    protected RenderPass(Material material, RenderTarget2D renderTarget)                                           
+    protected RenderPass()                                           
     {
       _drawables = new List<IDrawable>();
       Drawables = _drawables.AsReadOnly();
-
-      Material = material;
-      _renderTarget = renderTarget;
     }
     /// <summary>
     /// the drawables to be drawn in the current render pass
     /// </summary>
-    public IReadOnlyList<IGameObject> Drawables { get; }
+    public IReadOnlyList<IDrawable> Drawables { get; }
 
     /// <summary>
     /// The priority of a render pass, used for organising render passes in a RenderPassCollection
@@ -53,6 +50,7 @@ namespace BCEngine.Graphics
       if (!_drawables.Contains(drawable))
       {
         _drawables.Add(drawable);
+        drawable.AddRenderPass(this);
         return true;
       }
       return false;
@@ -79,10 +77,6 @@ namespace BCEngine.Graphics
     /// This is called by the Scene renderer, it renders to the RenderTarget
     /// </summary>
     /// <param name="spriteBatch">The spritebatch passed in by the renderer for rendering</param>
-    /// <returns>The private member, _renderTarget, after completing the render pass</returns>
-    public RenderTarget2D Render(SpriteBatch spriteBatch)
-    {
-      return _renderTarget;
-    }
+    public abstract bool Render(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice);
   }
 }
