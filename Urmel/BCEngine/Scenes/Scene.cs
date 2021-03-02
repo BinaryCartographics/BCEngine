@@ -1,4 +1,5 @@
-﻿using BCEngine.Interfaces;
+﻿using BCEngine.Graphics;
+using BCEngine.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -8,22 +9,23 @@ namespace BCEngine.Scenes
 {
   public abstract class Scene
   {
+
     private readonly List<IGameObject> _gameObjects;
-    private readonly List<IDrawable> _drawables;
+    private readonly List<RenderPass> _renderPasses;
 
-
-    protected Scene()
+    protected Scene(GraphicsDevice graphicsDevice)
     {
       _gameObjects = new List<IGameObject>();
-      _drawables = new List<IDrawable>();
-
       GameObjects = _gameObjects.AsReadOnly();
-      Drawables = _drawables.AsReadOnly();
+
+      _renderPasses = new List<RenderPass>();
+      RenderPasses = _renderPasses.AsReadOnly();
 
       BackgroundColor = Color.Transparent;
     }
+    public RenderTarget2D FinalRenderTarget { get; set; }
     public IReadOnlyList<IGameObject> GameObjects { get; }
-    public IReadOnlyList<IDrawable> Drawables { get; }
+    public IReadOnlyList<RenderPass> RenderPasses { get; }
     public Color BackgroundColor { get; set; }
 
     /// <summary>
@@ -43,9 +45,7 @@ namespace BCEngine.Scenes
     public abstract void OnUpdate(GameTime gameTime);
 
     /// <summary>
-    /// adds a game object to the scene to be updated and drawn, 
-    /// if you would prefer to draw something to a render layer, 
-    /// add the gameobject to that directly, without adding it to the scene
+    /// adds a game object to the scene, 
     /// </summary>
     /// <param name="gameObject">gameobject to add to scene</param>
     /// <returns>boolean value representing whether or not the function was successful</returns>
@@ -54,15 +54,31 @@ namespace BCEngine.Scenes
       if (!_gameObjects.Contains(gameObject))
       {
         _gameObjects.Add(gameObject);
-        if (gameObject is IDrawable drawableObject)
-          _drawables.Add(drawableObject);
         return true;
       }
       return false;
     }
 
     /// <summary>
-    /// removes a game object from the scene, 
+    /// adds a drawable game object to the scene and keeps a reference to it in the desired render pass, 
+    /// </summary>
+    /// <param name="gameObject">gameobject to add to scene</param>
+    /// <param name="renderPass">Render pass to add the gameobject to</param>
+    /// <returns>boolean value representing whether or not the function was successful</returns>
+    public bool AddGameObject(IDrawable gameObject, RenderPass renderPass)
+    {
+      int index = _renderPasses.IndexOf(renderPass);
+      if (!_gameObjects.Contains(gameObject) && index != -1)
+      {
+        _gameObjects.Add(gameObject);
+        _renderPasses[index].AddDrawableToRenderPass(gameObject);
+        return true;
+      }
+      return false;
+    }
+
+    /// <summary>
+    /// removes a game object from the scene,
     /// </summary>
     /// <param name="gameObject">gameobject to remove from the scene</param>
     /// <returns>boolean value representing whether or not the function was successful</returns>
@@ -71,23 +87,60 @@ namespace BCEngine.Scenes
       if (_gameObjects.Contains(toRemove))
       {
         _gameObjects.Remove(toRemove);
-        if (toRemove is IDrawable drawableObject)
-          _drawables.Remove(drawableObject);
         return true;
       }
       return false;
     }
 
+    /// <summary>
+    /// removes a drawable game object from the scene
+    /// </summary>
+    /// <param name="toRemove">drawable gameobject to remove from the scene</param>
+    /// <returns>boolean value representing whether or not the function was successful</returns>
+    public bool RemoveGameObject(IDrawable toRemove)
+    {
+      if (_gameObjects.Contains(toRemove))
+      {
+        _gameObjects.Remove(toRemove);
+        foreach (RenderPass r in toRemove.AttachedRenderPasses)
+        {
+          r.RemoveDrawableFromRenderPass(toRemove);
+        }
+        return true;
+      }
+      return false;
+    }
+
+    public bool AddRenderPass(RenderPass renderPass)
+    {
+      if (!_renderPasses.Contains(renderPass))
+      {
+        _renderPasses.Add(renderPass);
+        _renderPasses.Sort((x, y) => x.RenderPriority.CompareTo(y.RenderPriority));
+        return true;
+      }
+      return false;
+    }
+
+    public bool RemoveRenderPass(RenderPass renderPass)
+    {
+      if (_renderPasses.Contains(renderPass))
+      {
+        _renderPasses.Remove(renderPass);
+        return true;
+      }
+      return false;
+    }
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
-      var color = BackgroundColor;
-      graphicsDevice.Clear(color);
-
-      spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.DepthRead, RasterizerState.CullNone, null, null);
-      foreach (var drawable in _drawables)
+      foreach (RenderPass R in this._renderPasses)
       {
-        drawable.Draw(graphicsDevice, spriteBatch);
+        R.Render(spriteBatch, graphicsDevice);
       }
+
+      graphicsDevice.SetRenderTarget(null);
+      spriteBatch.Begin();
+      spriteBatch.Draw(FinalRenderTarget, graphicsDevice.Viewport.Bounds, FinalRenderTarget.Bounds, Color.White);
       spriteBatch.End();
     }
   }
