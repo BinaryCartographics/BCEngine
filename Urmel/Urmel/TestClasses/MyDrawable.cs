@@ -65,5 +65,10 @@ namespace Urmel.TestClasses
     {
       this.DrawDefaultImplementation(Texture, spriteBatch, LayerDepth);
     }
+
+    public bool Contains(Vector2 Position)
+    {
+      return this.ContainsDefaultImplementation(Transform, Position);
+    }
   }
 }

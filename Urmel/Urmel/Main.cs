@@ -1,4 +1,5 @@
-﻿using BCEngine.Scenes;
+﻿using BCEngine.Input;
+using BCEngine.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -45,7 +46,7 @@ namespace Urmel
           Keyboard.GetState().IsKeyDown(Keys.Escape) || 
           TouchPanel.GetState().Any())
         Exit();
-
+      InputManager.Update();
       _sceneManager.Update(gameTime);
       base.Update(gameTime);
     }

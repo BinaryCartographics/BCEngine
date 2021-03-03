@@ -1,4 +1,5 @@
 ﻿using BCEngine.Interfaces;
+using BCEngine.UI;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -34,6 +35,7 @@ namespace BCEngine.Graphics
     /// </summary>
     public IReadOnlyList<IDrawable> Drawables { get; }
 
+
     /// <summary>
     /// The priority of a render pass, used for organising render passes in a RenderPassCollection
     /// </summary>
@@ -66,8 +68,7 @@ namespace BCEngine.Graphics
       if (_drawables.Contains(drawable))
       {
         _drawables.Remove(drawable);
-        if (drawable is IDrawable drawableObject)
-          _drawables.Remove(drawableObject);
+        drawable.RemoveRenderPass(this);
         return true;
       }
       return false;

@@ -49,3 +49,39 @@
 /processorParam:TextureFormat=Color
 /build:../../Urmel/Content/Textures/tileset.png;Textures/tileset.png
 
+#begin ../../Urmel/Content/Textures/UI/Button/Button_DefaultTexture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../Urmel/Content/Textures/UI/Button/Button_DefaultTexture.png;Textures/UI/Button/Button_DefaultTexture.png
+
+#begin ../../Urmel/Content/Textures/UI/Button/Button_HoverTexture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../Urmel/Content/Textures/UI/Button/Button_HoverTexture.png;Textures/UI/Button/Button_HoverTexture.png
+
+#begin ../../Urmel/Content/Textures/UI/Button/Button_PressTexture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../Urmel/Content/Textures/UI/Button/Button_PressTexture.png;Textures/UI/Button/Button_PressTexture.png
+
