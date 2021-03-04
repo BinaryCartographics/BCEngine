@@ -73,7 +73,11 @@ namespace BCEngine.Scenes
     /// <param name="gameTime">The elapsed time since the last call to Update()</param>
     public void Update(GameTime gameTime)
     {
-      CurrentScene?.OnUpdate(gameTime);
+      if (CurrentScene != null)
+      { 
+        CurrentScene.OnUpdate(gameTime);
+        CurrentScene.DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+      }
     }
 
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)

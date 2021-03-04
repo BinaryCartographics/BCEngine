@@ -15,4 +15,8 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="TestClasses\" />
+  </ItemGroup>
 </Project>

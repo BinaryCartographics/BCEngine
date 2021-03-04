@@ -4,6 +4,7 @@ using BCEngine.UI.Skinning;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace BCEngine.UI
 {
@@ -74,7 +75,7 @@ namespace BCEngine.UI
 
     public override void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
-      this.DrawDefaultImplementation(Texture, spriteBatch, LayerDepth);
+      throw new NotImplementedException();
     }
   }
 }

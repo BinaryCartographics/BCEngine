@@ -10,4 +10,9 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Math\Generators\" />
+    <Folder Include="Tilemapping\" />
+  </ItemGroup>
 </Project>

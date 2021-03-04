@@ -6,8 +6,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System.Linq;
 using Urmel.Scenes;
-using Urmel.Scenes.GaussianBlurTestSceneClasses;
-using Urmel.TestClasses;
 
 namespace Urmel
 {
@@ -16,7 +14,7 @@ namespace Urmel
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private readonly SceneManager _sceneManager;
-    PipelineTestScene gaussianBlurTestScene;
+    TilemapScene scene;
     public Main()
     {
       _graphics = new GraphicsDeviceManager(this);
@@ -33,10 +31,9 @@ namespace Urmel
 
     protected override void LoadContent()
     {
-      gaussianBlurTestScene = new PipelineTestScene(GraphicsDevice, Content);
-
-      _sceneManager.AddScene(gaussianBlurTestScene);
-      _sceneManager.NavigateToScene(gaussianBlurTestScene);
+      scene = new TilemapScene(GraphicsDevice, Content);
+      _sceneManager.AddScene(scene);
+      _sceneManager.NavigateToScene(scene);
       _spriteBatch = new SpriteBatch(GraphicsDevice);
     }
 

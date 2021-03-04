@@ -5,46 +5,30 @@ using BCEngine.Math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using IDrawable = BCEngine.Interfaces.IDrawable;
 
-namespace Urmel.TestClasses
+namespace BCEngine.Common
 {
-  class MyDrawable : BCEngine.Interfaces.IDrawable
+  public abstract class DrawableGameObject : IGameObject, IDrawable
   {
-    public string Name { get; }
     private readonly List<IGameObject> _children;
     private readonly List<RenderPass> _attachedRenderPasses;
-    public Transform Transform { get; set; } = Transform.Identity;
-    public Transform WorldTransform
+    protected DrawableGameObject()
     {
-      get
-      {
-        return this.WorldTransformDefaultImplementation();
-      }
-    }
-    public IGameObject Parent { get; set; }
-    public IReadOnlyList<IGameObject> Children { get; }
-    public IReadOnlyList<RenderPass> AttachedRenderPasses { get; }
-    public Texture2D Texture { get; set; }
-    public Vector2 Origin { get; set; }
-    public Rectangle Bounds { get; set; }
-    public Rectangle SourceRectangle { get; set; }
-    public Color Color { get; set; } = Color.White;
-    public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
-    public float LayerDepth { get; set; } = 0f;
-    public MyDrawable(string name, Texture2D texture2D)
-    {
-      Texture = texture2D;
-      Name = name;
       _children = new List<IGameObject>();
       Children = _children.AsReadOnly();
 
       _attachedRenderPasses = new List<RenderPass>();
       AttachedRenderPasses = _attachedRenderPasses.AsReadOnly();
-
-      SourceRectangle = Texture.Bounds;
-      Bounds = Texture.Bounds;
-      Origin = new Vector2(Bounds.Width / 2, Bounds.Height / 2);
     }
+    public string Name { get; }
+    public IGameObject Parent { get; set; }
+    public IReadOnlyList<IGameObject> Children { get; }
+    public Transform WorldTransform => this.WorldTransformDefaultImplementation();
+    public Transform Transform { get; set; }
+    public Vector2 Origin { get; set; }
+    public IReadOnlyList<RenderPass> AttachedRenderPasses { get; }
+    public Rectangle Bounds { get; set; }
     public bool AddGameObject(IGameObject gameObject)
     {
       return this.AddGameObjectDefaultImplementation(gameObject, _children);
@@ -61,14 +45,10 @@ namespace Urmel.TestClasses
     {
       this.RemoveRenderPassDefaultImplementation(renderPass, _attachedRenderPasses);
     }
-    public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
-    {
-      this.DrawDefaultImplementation(Texture, spriteBatch, LayerDepth);
-    }
-
     public bool Contains(Vector2 Position)
     {
       return this.ContainsDefaultImplementation(Transform, Position);
     }
+    public abstract void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch);
   }
 }

@@ -39,7 +39,7 @@ namespace BCEngine.Graphics
     /// <summary>
     /// The priority of a render pass, used for organising render passes in a RenderPassCollection
     /// </summary>
-    public int RenderPriority { get; }                                                                             
+    public abstract int RenderPriority { get; }                                                                             
 
     /// <summary>
     /// Adds an IDrawable to the render pass for it to be rendered to renderTarget this.Material
@@ -78,6 +78,6 @@ namespace BCEngine.Graphics
     /// This is called by the Scene renderer, it renders to the RenderTarget
     /// </summary>
     /// <param name="spriteBatch">The spritebatch passed in by the renderer for rendering</param>
-    public abstract bool Render(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice);
+    public abstract void Render(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice);
   }
 }

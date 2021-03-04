@@ -1,16 +1,19 @@
 ﻿using BCEngine.Graphics;
 using BCEngine.Interfaces;
+using BCEngine.Math;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using IDrawable = BCEngine.Interfaces.IDrawable;
 
 namespace BCEngine.Helpers
 {
   public static class IDrawableExtensions
   {
-    public static bool DrawDefaultImplementation(this IDrawable Parent, Texture2D texture, SpriteBatch spriteBatch, float LayerDepth)
+    public static bool DrawDefaultImplementation(this IDrawable Parent, Transform transform, Rectangle rectangle, Texture2D texture, SpriteBatch spriteBatch, float LayerDepth)
     {
-      spriteBatch.Draw(texture, Parent.WorldTransform.Position, Parent.SourceRectangle, Parent.Color, 
-        Parent.WorldTransform.Rotation, Parent.Origin, Parent.WorldTransform.Scale, SpriteEffects.None, LayerDepth);
+      spriteBatch.Draw(texture, transform.Position, rectangle, Color.White, 
+        transform.Rotation, Parent.Origin, transform.Scale, SpriteEffects.None, LayerDepth);
       return true;
     }
 
