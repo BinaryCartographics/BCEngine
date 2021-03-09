@@ -12,6 +12,14 @@ namespace BCEngine.Math
       Scale = Vector2.One,
       Rotation = 0f
     };
+
+    public Transform(Vector2 position, Vector2 scale, float rotation)
+    {
+      Position = position;
+      Scale = scale;
+      Rotation = rotation;
+    }
+
     public Vector2 Position { get; set; }
     public Vector2 Scale { get; set; }
     public float Rotation { get; set; }
@@ -31,6 +39,26 @@ namespace BCEngine.Math
     {
       get { return _identity; }
     }
+
+    public static bool operator ==(Transform a, Transform b)
+    {
+      bool pos = a.Position == b.Position;
+      bool rot = a.Rotation == b.Rotation;
+      bool scl = a.Scale == b.Scale;
+      return pos && rot && scl;
+    }
+    public static bool operator !=(Transform a, Transform b)
+    {
+      return !(a == b);
+    }
+
+    public override bool Equals(object obj) =>
+    obj is Transform transform
+        && transform.Position == Position
+        && transform.Rotation == Rotation
+        && transform.Scale == Scale;
+
+    public override int GetHashCode() => (Position, Rotation, Scale).GetHashCode();
 
     /// <summary>
     /// Creates a world space transform from a parent transform and child transform where the child coordinates are localised to the parent

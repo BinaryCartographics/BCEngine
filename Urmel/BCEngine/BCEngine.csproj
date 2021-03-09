@@ -12,7 +12,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="Math\Generators\" />
+    <Folder Include="Math\Interpolation\" />
     <Folder Include="Tilemapping\" />
   </ItemGroup>
 </Project>

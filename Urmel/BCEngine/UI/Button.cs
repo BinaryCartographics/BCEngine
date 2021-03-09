@@ -32,7 +32,7 @@ namespace BCEngine.UI
     public Texture2D HoverTexture { get; set; }
     public Texture2D PressTexture { get; set; }
     public Texture2D Texture { get; private set; }
-    public override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
       MouseEventArgs mouseEventArgs = new MouseEventArgs(InputManager.MouseState);
       Vector2 LocalMousePos = InputManager.MouseState.Position.ToVector2();

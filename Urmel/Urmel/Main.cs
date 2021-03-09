@@ -1,5 +1,6 @@
 ﻿using BCEngine.Input;
 using BCEngine.Scenes;
+using BCEngine.UI.Text.FontFormats;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,15 +16,17 @@ namespace Urmel
     private SpriteBatch _spriteBatch;
     private readonly SceneManager _sceneManager;
     TilemapScene scene;
+
+    readonly Codepage437 TextFormat437 = new Codepage437();
+
     public Main()
     {
       _graphics = new GraphicsDeviceManager(this);
       Content.RootDirectory = "Content";
       IsMouseVisible = true;
       _sceneManager = new SceneManager();
-
-
     }
+
     protected override void Initialize()
     {
       base.Initialize();
@@ -31,7 +34,7 @@ namespace Urmel
 
     protected override void LoadContent()
     {
-      scene = new TilemapScene(GraphicsDevice, Content);
+      scene = new TilemapScene(GraphicsDevice, Content, TextFormat437);
       _sceneManager.AddScene(scene);
       _sceneManager.NavigateToScene(scene);
       _spriteBatch = new SpriteBatch(GraphicsDevice);

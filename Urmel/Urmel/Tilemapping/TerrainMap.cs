@@ -39,7 +39,7 @@ namespace Urmel.Tilemapping
 
     public override void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
-      col = Shapes.CreateColorPixel(Color.White, graphicsDevice);
+      col = TextureGenerator.CreateColorPixel(Color.White, graphicsDevice);
       for (int x = 0; x < Width; x++)
       {
         for (int y = 0; y < Height; y++)

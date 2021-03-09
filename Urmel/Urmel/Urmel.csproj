@@ -17,6 +17,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="TestClasses\" />
+    <Folder Include="RogueLike\" />
   </ItemGroup>
 </Project>

@@ -85,6 +85,18 @@
 /processorParam:TextureFormat=Color
 /build:../../Urmel/Content/Textures/UI/Button/Button_PressTexture.png;Textures/UI/Button/Button_PressTexture.png
 
+#begin ../../Urmel/Content/Textures/UI/Fonts/Codepage437/jazz12_df.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../Urmel/Content/Textures/UI/Fonts/Codepage437/jazz12_df.png;Textures/Fonts/Codepage437/jazz12_df.png
+
 #begin ../../Urmel/Content/Textures/UI/Fonts/Codepage437/taffer20x20.png
 /importer:TextureImporter
 /processor:TextureProcessor

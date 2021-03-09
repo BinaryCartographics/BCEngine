@@ -10,6 +10,10 @@ namespace BCEngine.Common
     public Transform Transform { get; set; }
     public Rectangle Bounds { get; set; }
     public Vector2 Origin { get; set; }
+    public Camera()
+    {
+      this.SetScale(Vector2.One);
+    }
     public bool Contains(Vector2 Position)
     {
       return this.ContainsDefaultImplementation(Transform, Position);

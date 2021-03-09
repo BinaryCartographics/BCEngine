@@ -23,6 +23,7 @@ namespace BCEngine.UI
       Children = _children.AsReadOnly();
       _attatchedRenderPasses = new List<RenderPass>();
       AttachedRenderPasses = _attatchedRenderPasses.AsReadOnly();
+      this.SetScale(Vector2.One);
     }
     public IReadOnlyList<RenderPass> AttachedRenderPasses { get; }
     public Vector2 Origin { get; set; }
@@ -47,7 +48,6 @@ namespace BCEngine.UI
     {
       return this.ContainsDefaultImplementation(Transform, Position);
     }
-    public abstract void Update(GameTime gameTime);
     public abstract void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch);
   }
 }

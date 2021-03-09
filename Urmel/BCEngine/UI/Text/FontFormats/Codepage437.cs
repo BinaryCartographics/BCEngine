@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace BCEngine.UI.Text.FontFormats
 {
@@ -9,7 +8,7 @@ namespace BCEngine.UI.Text.FontFormats
     public Codepage437()
     {
       Width = 16;
-      Height = 16;
+      Height = 16; 
     }
     public override List<char> CodepageChars { get; } = new List<char>
     {
@@ -30,5 +29,6 @@ namespace BCEngine.UI.Text.FontFormats
             'α','ß','Γ','π','Σ','σ','µ','τ','Φ','Θ','Ω','δ','∞','φ','ε','∩',
             '≡','±','≥','≤','⌠','⌡','÷','≈','°','∙','·','√','ⁿ','²','■','\n'
     };
+
   }
 }
