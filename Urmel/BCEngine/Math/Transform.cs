@@ -170,14 +170,14 @@ namespace BCEngine.Math
     }
 
     /// <summary>
-    /// Translates a transform in local space by the value of a vector2
+    /// Translates a transform in localized space by the value of a vector2
     /// </summary>
     /// <param name="transform">Transform to be translated</param>
     /// <param name="Translation">translation amount</param>
-    /// <returns>new transform with local translation applied</returns>
+    /// <returns>new transform with localized translation applied</returns>
     public static Transform Translate(Transform transform, Vector2 Translation)
     {
-      transform.Position += Translation;
+      transform.Position = TransformVector(transform, Translation);
       return transform;
     }
     /// <summary>

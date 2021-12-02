@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BCEngine.Graphics
 { 
-  class Sprite : DrawableGameObject
+  public class Sprite : DrawableGameObject
   {
     public Texture2D Texture { get; set; }
     public Sprite(Texture2D texture)

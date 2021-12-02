@@ -17,6 +17,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="RogueLike\" />
+    <Folder Include="EDCartographics\" />
   </ItemGroup>
 </Project>

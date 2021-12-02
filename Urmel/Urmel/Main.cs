@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using System;
 using System.Linq;
 using Urmel.Scenes;
 
@@ -15,7 +16,7 @@ namespace Urmel
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private readonly SceneManager _sceneManager;
-    TilemapScene scene;
+    TestScene scene;
 
     readonly Codepage437 TextFormat437 = new Codepage437();
 
@@ -25,6 +26,8 @@ namespace Urmel
       Content.RootDirectory = "Content";
       IsMouseVisible = true;
       _sceneManager = new SceneManager();
+      Window.AllowUserResizing = true;
+      Window.ClientSizeChanged += OnResize;
     }
 
     protected override void Initialize()
@@ -34,10 +37,14 @@ namespace Urmel
 
     protected override void LoadContent()
     {
-      scene = new TilemapScene(GraphicsDevice, Content, TextFormat437);
+      scene = new TestScene(GraphicsDevice, Content, TextFormat437);
       _sceneManager.AddScene(scene);
       _sceneManager.NavigateToScene(scene);
       _spriteBatch = new SpriteBatch(GraphicsDevice);
+    }
+    private void OnResize(object sender, EventArgs e)
+    {
+      _graphics.ApplyChanges();
     }
 
     protected override void Update(GameTime gameTime)

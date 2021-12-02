@@ -1,4 +1,5 @@
-﻿using BCEngine.Math;
+﻿using System;
+using BCEngine.Math;
 using BCEngine.UI.Text;
 using BCEngine.Helpers;
 using Microsoft.Xna.Framework;
@@ -8,16 +9,65 @@ namespace BCEngine.UI
 {
   public class TextBox : Widget
   {
-    private CharTile[,] Characters { get; }
-    private Transform OldTransform { get; set; }
-    public int BufferWidth { get; }
-    public int BufferHeight { get; }
+    public CharTile[,] Characters { get; private set; }
+
+    /// <summary>
+    /// The width of the TextBox in Characters
+    /// </summary>
+    public int BufferWidth { get; private set; }
+
+    /// <summary>
+    /// The height of the TextBox in Characters
+    /// </summary>
+    public int BufferHeight { get; private set; }
+
+    /// <summary>
+    /// The width of the TextBox in pixels
+    /// </summary>
+    public int Width { get; private set; }
+    /// <summary>
+    /// The height of the TextBox in pixels
+    /// </summary>
+    public int Height { get; private set; }
+
+    /// <summary>
+    /// Constructs a new TextBox 
+    /// Note: Using pixel mode will only create a character width below pixel width, if a char is 12 px, and you set width to 13, you get 1 character
+    /// </summary>
+    /// <param name="width">The width of the TextBox in relation to textScalingMode</param>
+    /// <param name="height">The width of the TextBox in relation to textScalingMode</param>
+    /// <param name="textFont">The font of the TextBox</param>
+    /// <param name="textScalingMode">The scaling mode for the textBox, either in characters, or pixels</param>
+    public TextBox(int width, int height, TextFont textFont, TextScalingMode textScalingMode)
+    {
+      CreateTextBox(width, height, textFont, textScalingMode);
+    }
+    /// <summary>
+    /// Constructs a new TextBox
+    /// </summary>
+    /// <param name="width">The width of the TextBox in relation to textFont.CharWidth</param>
+    /// <param name="height">The height of the TextBox in relation to textFont.CharHeight</param>
+    /// <param name="textFont">The font of the TextBox</param>
     public TextBox(int width, int height, TextFont textFont)
     {
-      BufferWidth = width;
-      BufferHeight = height;
-      Characters = new CharTile[width, height];
-      
+      CreateTextBox(width, height, textFont, TextScalingMode.Characters);
+    }
+    private void CreateTextBox(int width, int height, TextFont textFont, TextScalingMode textScalingMode)
+    {
+      switch (textScalingMode)
+      {
+        case TextScalingMode.Characters:
+          BufferWidth = width;
+          BufferHeight = height;
+          break;
+        case TextScalingMode.Pixels:
+          BufferWidth = MathHelper.Max(width / textFont.CharWidth, 1);
+          BufferHeight = MathHelper.Max(height / textFont.CharHeight, 1);
+          break;
+      }
+
+      Characters = new CharTile[BufferWidth, BufferHeight];
+
       for (int y = 0; y < Characters.GetLength(1); y++)
       {
         for (int x = 0; x < Characters.GetLength(0); x++)
@@ -34,9 +84,8 @@ namespace BCEngine.UI
     public void SetCursorPosition(int X, int Y)
     {
       CursorPosition = new Point(
-          MathHelper.Clamp(X, 0, BufferWidth),
-          MathHelper.Clamp(Y, 0, BufferHeight)
-          );
+          MathHelper.Clamp(X, 0, BufferWidth - 1),
+          MathHelper.Clamp(Y, 0, BufferHeight - 1));
     }
     public void SetCursorPosition(Point position)
     {

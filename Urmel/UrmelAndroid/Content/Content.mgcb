@@ -95,7 +95,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../../Urmel/Content/Textures/UI/Fonts/Codepage437/jazz12_df.png;Textures/Fonts/Codepage437/jazz12_df.png
+/build:../../Urmel/Content/Textures/UI/Fonts/Codepage437/jazz12_df.png;Textures/UI/Fonts/Codepage437/jazz12_df.png
 
 #begin ../../Urmel/Content/Textures/UI/Fonts/Codepage437/taffer20x20.png
 /importer:TextureImporter
@@ -107,7 +107,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../../Urmel/Content/Textures/UI/Fonts/Codepage437/taffer20x20.png;Textures/Fonts/Codepage437/taffer20x20.png
+/build:../../Urmel/Content/Textures/UI/Fonts/Codepage437/taffer20x20.png;Textures/UI/Fonts/Codepage437/taffer20x20.png
 
 #begin ../../Urmel/Content/Textures/UI/Fonts/Codepage437/teeto18.png
 /importer:TextureImporter
@@ -119,5 +119,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../../Urmel/Content/Textures/UI/Fonts/Codepage437/teeto18.png;Textures/Fonts/Codepage437/teeto18.png
+/build:../../Urmel/Content/Textures/UI/Fonts/Codepage437/teeto18.png;Textures/UI/Fonts/Codepage437/teeto18.png
 

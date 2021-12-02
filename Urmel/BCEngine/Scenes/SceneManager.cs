@@ -80,6 +80,7 @@ namespace BCEngine.Scenes
       }
     }
 
+
     public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
     {
       CurrentScene?.Draw(graphicsDevice, spriteBatch);

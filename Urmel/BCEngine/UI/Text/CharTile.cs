@@ -10,6 +10,11 @@ namespace BCEngine.UI.Text
   {
     private TextFont Font { get; }
     new private Widget Parent { get; }
+    new public Transform WorldTransform { get
+      {
+        return Transform.Compose(Parent.Transform, Transform);
+      }
+    }
     private int CharWidth { get; }
     private int CharHeight { get; }
     public CharTile(TextFont font, Widget parent)
